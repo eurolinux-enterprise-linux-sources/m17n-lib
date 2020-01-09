@@ -5,7 +5,7 @@
 
 Name:    m17n-lib
 Version:  1.5.5
-Release:  2%{?dist}
+Release:  2%{?dist}.1
 Summary:  Multilingual text library
 
 Group:    System Environment/Libraries
@@ -29,6 +29,7 @@ BuildRequires:  anthy-devel
 %endif
 Requires:  m17n-db >= 1.4.0
 Patch2:    m17n-lib-nobuild-examples.patch
+Patch3:    m17n-lib-1.5.5-altgr.patch
 
 %description
 m17n-lib is a multilingual text library used primarily to allow
@@ -50,6 +51,9 @@ Development files for %{name}.
 %if ! %{with_examples}
 %patch2 -p1 -b .examples
 %endif
+
+%patch3 -p1 -b .altgr
+
 # patch2 touches Makefile.am
 autoreconf
 
@@ -96,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jun 20 2011 Parag <pnemade AT redhat DOT com> - 1.5.5-2.el6_1.1
+- Resolves:rh#712118 - [Indic] Rupee Symbol (U+20B9) input: support Alt_Gr in m17n-lib 
+
 * Thu Feb 25 2010 Parag <pnemade AT redhat.com> - 1.5.5-2
 - Resolves:rh#568302 - Fix license tag to LPGLv2+
 

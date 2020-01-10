@@ -1,0 +1,14 @@
+--- m17n-lib/src/internal.h	2012-04-23 05:46:56.000000000 +0530
++++ GIT/m17n-lib/src/internal.h	2015-06-01 21:47:15.764862073 +0530
+@@ -383,7 +383,10 @@
+     if (object)								\
+       {									\
+ 	if (((M17NObject *) (object))->ref_count_extended)		\
+-	  m17n_object_unref (object);					\
++	  {								\
++	    if (m17n_object_unref (object) == 0)			\
++	      (object) = NULL;						\
++	  }								\
+ 	else if (((M17NObject *) (object))->ref_count == 0)		\
+ 	  break;							\
+ 	else								\

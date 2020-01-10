@@ -1,6 +1,6 @@
 Name:    m17n-lib
 Version:  1.6.4
-Release:  14%{?dist}
+Release:  8.1%{?dist}
 Summary:  Multilingual text library
 
 Group:    System Environment/Libraries
@@ -9,12 +9,11 @@ URL:    http://www.nongnu.org/m17n/
 Source0:  http://download.savannah.gnu.org/releases/m17n/%{name}-%{version}.tar.gz
 Patch0:  %{name}-1.6.1-multilib.patch
 Patch1:	 %{name}-1.6.4-aarch64.patch
-Patch2:  %{name}-1.6.4-HEAD-internal_h.patch
 
-BuildRequires:  m17n-db-devel libthai-devel
+BuildRequires:  m17n-db-devel libthai
 BuildRequires:  libxml2-devel, libXft-devel, fontconfig-devel
 BuildRequires:  freetype-devel , fribidi-devel, gd-devel, libXaw-devel
-BuildRequires:  libotf-devel, bzip2-devel
+BuildRequires:  libotf-devel
 Requires:  m17n-db
 
 
@@ -48,7 +47,6 @@ Tools to test M17n GUI widget library.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %configure --disable-rpath --disable-static
@@ -98,25 +96,6 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/libm17n-gui.so.*
 
 %changelog
-* Tue Jun 02 2015 Parag Nemade <pnemade AT redhat DOT com> - 1.6.4-14
-- Resolves:rh#1125602 - coverity scan issue apply upstream patch
-- forgot to actually apply patch
-
-* Tue Jun 02 2015 Parag Nemade <pnemade AT redhat DOT com> - 1.6.4-13
-- Resolves:rh#1125602 - coverity scan issue apply upstream patch
-
-* Mon Aug 18 2014 Peter Robinson <pbrobinson@redhat.com> - 1.6.4-12
-- Resolves:rh#1125602 - Fix explicit build dependencies
-
-* Mon Aug 18 2014 Parag Nemade <pnemade AT redhat DOT com> - 1.6.4-11
-- Resolves:rh#1125602 - m17n-lib fails to build on arch: ppc64le 
-
-* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.6.4-10
-- Mass rebuild 2014-01-24
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.6.4-9
-- Mass rebuild 2013-12-27
-
 * Fri Aug 30 2013 Parag Nemade <pnemade AT redhat DOT com> - 1.6.4-8.1
 - Resolves:rh#1002868 - m17n-lib-anthy fails to install because of missing dependencies
 
